@@ -1,0 +1,207 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String  @id @default(cuid()) @map("id")
+  name     String
+  email    String  @unique
+  password String?
+  picture  String  @default("/uploads/no-user-image.png")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  orders    Order[]
+  favorites Favorite[]
+
+  shippingAddress   ShippingAddress[]
+  shippingAddressId String?
+  Product           Product[]
+
+  @@map("user")
+}
+
+model Category {
+  id   String @id @default(cuid()) @map("id")
+  name String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  products Product[] @relation("CategoryOnProducts")
+
+  @@map("category")
+}
+
+model DressStyle {
+  id   String @id @default(cuid()) @map("id")
+  name String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  products Product[] @relation("DressStyleOnProducts")
+
+  categoryId String? @map("category_id")
+
+  @@map("dress_style")
+}
+
+model Product {
+  id     String     @id @default(cuid()) @map("id")
+  name   String
+  brand  String
+  price  Int
+  gender EnumGender
+  images String[]   @default(["/uploads/no-image.png"])
+
+  colors ProductColor[]
+  sizes  ProductSize[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  category   Category? @relation("CategoryOnProducts", fields: [categoryId], references: [id])
+  categoryId String?   @map("category_id")
+
+  dressStyle DressStyle? @relation("DressStyleOnProducts", fields: [styleId], references: [id])
+  styleId    String?     @map("style_id")
+
+  favorites  Favorite[]
+  orderItems OrderItem[]
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String? @map("user_id")
+
+  @@map("product")
+}
+
+model Color {
+  id   String @id @default(cuid()) @map("id")
+  name String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  products ProductColor[]
+
+  value String
+
+  @@map("color")
+}
+
+model ProductColor {
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @map("product_id")
+
+  color   Color  @relation(fields: [colorId], references: [id])
+  colorId String @map("color_id")
+
+  @@id([productId, colorId])
+  @@map("product_color")
+}
+
+model Size {
+  id   String @id @default(cuid()) @map("id")
+  name String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  products ProductSize[]
+
+  @@map("size")
+}
+
+model ProductSize {
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @map("product_id")
+
+  size   Size   @relation(fields: [sizeId], references: [id])
+  sizeId String @map("size_id")
+
+  @@id([productId, sizeId])
+  @@map("product_size")
+}
+
+model Favorite {
+  id String @id @default(cuid()) @map("id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String? @map("user_id")
+
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String?  @map("product_id")
+
+  @@map("favorite")
+}
+
+model ShippingAddress {
+  id            String  @id @default(cuid()) @map("id")
+  streetAddress String  @map("street_address")
+  apartment     String?
+  city          String
+  state         String
+  postalCode    String  @map("postal_code")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String? @unique @map("user_id")
+
+  @@map("shipping_address")
+}
+
+model Order {
+  id          String      @id @default(cuid()) @map("id")
+  totalAmount Int         @map("total_amount")
+  shippingFee Int         @map("shipping_fee")
+  status      OrderStatus @default(PENDING) @map("order_status")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  items OrderItem[]
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String? @map("user_id")
+
+  @@map("order")
+}
+
+model OrderItem {
+  id       String @id @default(cuid()) @map("id")
+  quantity Int
+  price    Int
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String?  @map("product_id")
+
+  order   Order?  @relation(fields: [orderId], references: [id])
+  orderId String? @map("order_id")
+
+  @@map("order_item")
+}
+
+enum EnumGender {
+  MALE
+  FEMALE
+}
+
+enum OrderStatus {
+  PENDING
+  PAYED
+}
