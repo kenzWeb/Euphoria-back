@@ -163,15 +163,14 @@ model ShippingAddress {
 }
 
 model Order {
-  id          String      @id @default(cuid()) @map("id")
-  totalAmount Int         @map("total_amount")
-  shippingFee Int         @map("shipping_fee")
-  status      OrderStatus @default(PENDING) @map("order_status")
+  id     String      @id @default(cuid()) @map("id")
+  status OrderStatus @default(PENDING) @map("order_status")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   items OrderItem[]
+  total Int
 
   user   User?   @relation(fields: [userId], references: [id])
   userId String? @map("user_id")

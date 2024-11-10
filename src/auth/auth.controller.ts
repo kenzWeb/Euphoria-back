@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
 	Body,
 	Controller,
@@ -15,13 +16,19 @@ import { AuthGuard } from '@nestjs/passport'
 import { Request, Response } from 'express'
 import { AuthService } from './auth.service'
 import { AuthDto } from './dto/auth.dto'
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiBody } from '@nestjs/swagger'
 
+@ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
+	@ApiOperation({ summary: 'Login user' })
+	@ApiResponse({ status: 200, description: 'User logged in successfully' })
+	@ApiResponse({ status: 401, description: 'Unauthorized' })
+	@ApiBody({ type: AuthDto })
 	@Post('login')
 	async login(@Body() dto: AuthDto, @Res({ passthrough: true }) res: Response) {
 		const { refreshToken, ...response } = await this.authService.login(dto)
@@ -33,6 +40,10 @@ export class AuthController {
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
+	@ApiOperation({ summary: 'Register user' })
+	@ApiResponse({ status: 200, description: 'User registered successfully' })
+	@ApiResponse({ status: 401, description: 'Unauthorized' })
+	@ApiBody({ type: AuthDto })
 	@Post('register')
 	async register(
 		@Body() dto: AuthDto,
@@ -47,6 +58,9 @@ export class AuthController {
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
+	@ApiOperation({ summary: 'Get new access tokens' })
+	@ApiResponse({ status: 200, description: 'Tokens refreshed successfully' })
+	@ApiResponse({ status: 401, description: 'Refresh token missing or invalid' })
 	@Post('login/access-token')
 	async getNewTokens(
 		@Req() req: Request,
@@ -70,6 +84,8 @@ export class AuthController {
 	}
 
 	@HttpCode(200)
+	@ApiOperation({ summary: 'Logout user' })
+	@ApiResponse({ status: 200, description: 'User logged out successfully' })
 	@Post('logout')
 	async logout(@Res({ passthrough: true }) res: Response) {
 		this.authService.removeRefreshTokenFromResponse(res)
@@ -78,11 +94,12 @@ export class AuthController {
 
 	@Get('google')
 	@UseGuards(AuthGuard('google'))
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	@ApiOperation({ summary: 'Google OAuth login' })
 	async googleAuth(@Req() _req) {}
 
 	@Get('google/callback')
 	@UseGuards(AuthGuard('google'))
+	@ApiOperation({ summary: 'Google OAuth callback' })
 	async googleAuthCallback(
 		@Req() req,
 		@Res({ passthrough: true }) res: Response
@@ -99,11 +116,12 @@ export class AuthController {
 
 	@Get('yandex')
 	@UseGuards(AuthGuard('yandex'))
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	@ApiOperation({ summary: 'Yandex OAuth login' })
 	async yandexAuth(@Req() _req) {}
 
 	@Get('yandex/callback')
 	@UseGuards(AuthGuard('yandex'))
+	@ApiOperation({ summary: 'Yandex OAuth callback' })
 	async yandexAuthCallback(
 		@Req() req,
 		@Res({ passthrough: true }) res: Response
