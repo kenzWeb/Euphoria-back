@@ -13,10 +13,10 @@ import {
 	ValidationPipe
 } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { Request, Response } from 'express'
 import { AuthService } from './auth.service'
 import { AuthDto } from './dto/auth.dto'
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiBody } from '@nestjs/swagger'
 
 @ApiTags('Authentication')
 @Controller('auth')
@@ -58,9 +58,6 @@ export class AuthController {
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
-	@ApiOperation({ summary: 'Get new access tokens' })
-	@ApiResponse({ status: 200, description: 'Tokens refreshed successfully' })
-	@ApiResponse({ status: 401, description: 'Refresh token missing or invalid' })
 	@Post('login/access-token')
 	async getNewTokens(
 		@Req() req: Request,
@@ -110,18 +107,16 @@ export class AuthController {
 		this.authService.addRefreshTokenToResponse(res, refreshToken)
 
 		return res.redirect(
-			`${process.env['CLIENT_URL']}/dashboard?accessToken=${response.accessToken}`
+			`${process.env['CLIENT_URL']}?accessToken=${response.accessToken}`
 		)
 	}
 
 	@Get('yandex')
 	@UseGuards(AuthGuard('yandex'))
-	@ApiOperation({ summary: 'Yandex OAuth login' })
-	async yandexAuth(@Req() _req) {}
+	async yandexAuth(@Req() req) {}
 
 	@Get('yandex/callback')
 	@UseGuards(AuthGuard('yandex'))
-	@ApiOperation({ summary: 'Yandex OAuth callback' })
 	async yandexAuthCallback(
 		@Req() req,
 		@Res({ passthrough: true }) res: Response
@@ -132,7 +127,24 @@ export class AuthController {
 		this.authService.addRefreshTokenToResponse(res, refreshToken)
 
 		return res.redirect(
-			`${process.env['CLIENT_URL']}/dashboard?accessToken=${response.accessToken}`
+			`${process.env['CLIENT_URL']}?accessToken=${response.accessToken}`
 		)
+	}
+
+	@HttpCode(200)
+	@Get('check')
+	async checkAuth(@Req() req: Request, @Res() res: Response) {
+		const refreshTokenFromCookies =
+			req.cookies[this.authService.REFRESH_TOKEN_NAME]
+		if (!refreshTokenFromCookies) {
+			return res.json({ authenticated: false })
+		}
+
+		try {
+			await this.authService.getNewTokens(refreshTokenFromCookies)
+			return res.json({ authenticated: true })
+		} catch (e) {
+			return res.json({ authenticated: false })
+		}
 	}
 }

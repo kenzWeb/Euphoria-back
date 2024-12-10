@@ -54,15 +54,14 @@ model DressStyle {
 }
 
 model Product {
-  id     String     @id @default(cuid()) @map("id")
-  name   String
-  brand  String
-  price  Int
-  gender EnumGender
-  images String[]   @default(["/uploads/no-image.png"])
-
-  colors ProductColor[]
-  sizes  ProductSize[]
+  id          String          @id @default(cuid()) @map("id")
+  name        String
+  brand       String
+  price       Int
+  description String
+  images      String[]        @default(["/uploads/no-image.png"])
+  gender      EnumGender
+  type        EnumProductType? @default(BASE)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -79,55 +78,59 @@ model Product {
   user   User?   @relation(fields: [userId], references: [id])
   userId String? @map("user_id")
 
+  productColors ProductColor[]
+  productSizes  ProductSize[]
+
   @@map("product")
 }
 
-model Color {
-  id   String @id @default(cuid()) @map("id")
-  name String
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  products ProductColor[]
-
-  value String
-
-  @@map("color")
-}
-
 model ProductColor {
-  product   Product @relation(fields: [productId], references: [id])
-  productId String  @map("product_id")
+  productId String @map("product_id")
+  colorId   String @map("color_id")
 
-  color   Color  @relation(fields: [colorId], references: [id])
-  colorId String @map("color_id")
+  product Product @relation(fields: [productId], references: [id])
+  color   Color   @relation(fields: [colorId], references: [id])
 
   @@id([productId, colorId])
   @@map("product_color")
 }
 
-model Size {
-  id   String @id @default(cuid()) @map("id")
-  name String
+model ProductSize {
+  productId String @map("product_id")
+  sizeId    String @map("size_id")
+
+  product Product @relation(fields: [productId], references: [id])
+  size    Size    @relation(fields: [sizeId], references: [id])
+
+  @@id([productId, sizeId])
+  @@map("product_size")
+}
+
+model Color {
+  id String @id @default(cuid())
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  products ProductSize[]
+  name  String
+  value String
 
-  @@map("size")
+  productColors ProductColor[]
+
+  @@map("color")
 }
 
-model ProductSize {
-  product   Product @relation(fields: [productId], references: [id])
-  productId String  @map("product_id")
+model Size {
+  id String @id @default(cuid()) @map("id")
 
-  size   Size   @relation(fields: [sizeId], references: [id])
-  sizeId String @map("size_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@id([productId, sizeId])
-  @@map("product_size")
+  name  String
+
+  productSizes ProductSize[]
+
+  @@map("size")
 }
 
 model Favorite {
@@ -203,4 +206,11 @@ enum EnumGender {
 enum OrderStatus {
   PENDING
   PAYED
+}
+
+enum EnumProductType {
+  BASE
+  ARRIVAL
+  ZONE
+  LIMELIGHT
 }

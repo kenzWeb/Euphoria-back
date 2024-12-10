@@ -25,13 +25,12 @@ async function bootstrap() {
 
 	const document = SwaggerModule.createDocument(app, config)
 
-
 	SwaggerModule.setup('api', app, document)
 
 	logger.log('Swagger setup completed')
 
-	await app.listen(3000, () => {
-		logger.log('Application started on port 3000')
+	await app.listen(5001, () => {
+		logger.log('Application started on port 5001')
 	})
 }
 
