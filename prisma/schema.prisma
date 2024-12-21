@@ -18,11 +18,13 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   orders    Order[]
-  favorites Favorite[]
+  favorites Product[]
 
   shippingAddress   ShippingAddress[]
   shippingAddressId String?
-  Product           Product[]
+
+  productColors ProductColor[]
+  productSizes  ProductSize[]
 
   @@map("user")
 }
@@ -72,7 +74,6 @@ model Product {
   dressStyle DressStyle? @relation("DressStyleOnProducts", fields: [styleId], references: [id])
   styleId    String?     @map("style_id")
 
-  favorites  Favorite[]
   orderItems OrderItem[]
 
   user   User?   @relation(fields: [userId], references: [id])
@@ -111,24 +112,28 @@ model Arrival {
 }
 
 model ProductColor {
+  id        String @id @default(cuid())
   productId String @map("product_id")
   colorId   String @map("color_id")
 
   product Product @relation(fields: [productId], references: [id])
   color   Color   @relation(fields: [colorId], references: [id])
+  User    User?   @relation(fields: [userId], references: [id])
+  userId  String?
 
-  @@id([productId, colorId])
   @@map("product_color")
 }
 
 model ProductSize {
+  id        String @id @default(cuid())
   productId String @map("product_id")
   sizeId    String @map("size_id")
 
   product Product @relation(fields: [productId], references: [id])
   size    Size    @relation(fields: [sizeId], references: [id])
+  User    User?   @relation(fields: [userId], references: [id])
+  userId  String?
 
-  @@id([productId, sizeId])
   @@map("product_size")
 }
 
@@ -157,21 +162,6 @@ model Size {
   productSizes ProductSize[]
 
   @@map("size")
-}
-
-model Favorite {
-  id String @id @default(cuid()) @map("id")
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  user   User?   @relation(fields: [userId], references: [id])
-  userId String? @map("user_id")
-
-  product   Product? @relation(fields: [productId], references: [id])
-  productId String?  @map("product_id")
-
-  @@map("favorite")
 }
 
 model ShippingAddress {

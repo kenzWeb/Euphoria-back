@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common'
-import { EnumProductType } from '@prisma/client'
+import { EnumGender, EnumProductType } from '@prisma/client'
 import { PrismaService } from 'src/prisma.service'
 import { SizeDto } from 'src/size/dto/size.dto'
+import { EnumProductSort, FilterDto } from './dto/filter.dto'
 import { ColorDto, ProductDto } from './dto/product.dto'
 
 @Injectable()
@@ -12,7 +13,6 @@ export class ProductService {
 		return this.prisma.product.findMany({
 			include: {
 				category: true,
-				favorites: true,
 				orderItems: true,
 				dressStyle: true,
 				productColors: { include: { color: true } },
@@ -26,7 +26,6 @@ export class ProductService {
 			where: { id },
 			include: {
 				category: true,
-				favorites: true,
 				orderItems: true,
 				dressStyle: true,
 				productColors: { include: { color: true } },
@@ -35,12 +34,45 @@ export class ProductService {
 		})
 	}
 
-	async getByCategory(categoryId: string) {
+	async getByCategory(category: string) {
+		const data = await this.prisma.product.findMany({
+			where: { category: { name: category } },
+			include: {
+				category: true,
+				productColors: { include: { color: true } },
+				productSizes: { include: { size: true } }
+			}
+		})
+
+		if (!data) {
+			throw new Error('Product type not found')
+		}
+
+		return data
+	}
+
+	async getByCategoryId(categoryId: string) {
 		const data = await this.prisma.product.findMany({
 			where: { categoryId },
 			include: {
 				category: true,
-				favorites: true,
+				productColors: { include: { color: true } },
+				productSizes: { include: { size: true } }
+			}
+		})
+
+		if (!data) {
+			throw new Error('Product type not found')
+		}
+
+		return data
+	}
+
+	async getByStyle(style: string) {
+		const data = await this.prisma.product.findMany({
+			where: { dressStyle: { name: style } },
+			include: {
+				category: true,
 				orderItems: true,
 				dressStyle: true,
 				productColors: { include: { color: true } },
@@ -54,14 +86,10 @@ export class ProductService {
 
 		return data
 	}
-
-	async getByStyle(styleId: string) {
+	async getByStyleId(styleId: string) {
 		const data = await this.prisma.product.findMany({
 			where: { styleId },
 			include: {
-				category: true,
-				favorites: true,
-				orderItems: true,
 				dressStyle: true,
 				productColors: { include: { color: true } },
 				productSizes: { include: { size: true } }
@@ -79,12 +107,22 @@ export class ProductService {
 		const data = await this.prisma.product.findMany({
 			where: { type },
 			include: {
-				category: true,
-				favorites: true,
-				orderItems: true,
-				dressStyle: true,
-				productColors: { include: { color: true } },
-				productSizes: { include: { size: true } }
+				category: true
+			}
+		})
+
+		if (!data) {
+			throw new Error('Product type not found')
+		}
+
+		return data
+	}
+
+	async getByGender(gender: EnumGender) {
+		const data = await this.prisma.product.findMany({
+			where: { gender },
+			include: {
+				category: true
 			}
 		})
 
@@ -117,12 +155,84 @@ export class ProductService {
 				productSizes: { create: sizeConnect },
 				categoryId,
 				styleId: dto.styleId
+			}
+		})
+	}
+
+	async getAllFiltered(dto: FilterDto) {
+		const filters = []
+
+		if (dto.category) filters.push({ category: { name: dto.category } })
+		if (dto.categoryId) filters.push({ categoryId: dto.categoryId })
+		if (dto.style) filters.push({ dressStyle: { name: dto.style } })
+		if (dto.styleId) filters.push({ styleId: dto.styleId })
+		if (dto.gender) filters.push({ gender: dto.gender })
+
+		if (dto.minPrice || dto.maxPrice) {
+			filters.push({
+				price: {
+					...(dto.minPrice ? { gte: +dto.minPrice } : {}),
+					...(dto.maxPrice ? { lte: +dto.maxPrice } : {})
+				}
+			})
+		}
+
+		if (dto.colors) {
+			filters.push({
+				productColors: {
+					some: {
+						color: {
+							OR: [
+								{ id: { in: dto.colors } },
+								{ name: { in: dto.colors, mode: 'insensitive' } }
+							]
+						}
+					}
+				}
+			})
+		}
+
+		if (dto.sizes) {
+			filters.push({
+				productSizes: {
+					some: {
+						size: {
+							OR: [
+								{ id: { in: dto.sizes } },
+								{ name: { in: dto.sizes, mode: 'insensitive' } }
+							]
+						}
+					}
+				}
+			})
+		}
+
+		const orderBy = []
+
+		switch (dto.sort) {
+			case EnumProductSort.HIGH_PRICE:
+				orderBy.push({ price: 'desc' })
+				break
+			case EnumProductSort.LOW_PRICE:
+				orderBy.push({ price: 'asc' })
+				break
+			case EnumProductSort.NEWEST:
+				orderBy.push({ createdAt: 'desc' })
+				break
+			case EnumProductSort.OLDEST:
+				orderBy.push({ createdAt: 'asc' })
+				break
+		}
+
+		return this.prisma.product.findMany({
+			where: {
+				AND: filters
 			},
+			orderBy,
 			include: {
 				category: true,
-				favorites: true,
-				orderItems: true,
 				dressStyle: true,
+				orderItems: true,
 				productColors: { include: { color: true } },
 				productSizes: { include: { size: true } }
 			}
@@ -167,7 +277,7 @@ export class ProductService {
 						id: productId
 					}
 				}
-			}
+			},
 		})
 
 		return { message: 'Success' }

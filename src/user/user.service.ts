@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { hash } from 'argon2'
 import { AuthDto } from 'src/auth/dto/auth.dto'
 import { PrismaService } from 'src/prisma.service'
@@ -15,6 +15,8 @@ export class UserService {
 			include: {
 				favorites: true,
 				orders: true,
+				productColors: { include: { color: true } },
+				productSizes: { include: { size: true } },
 				shippingAddress: true
 			}
 		})
@@ -40,7 +42,12 @@ export class UserService {
 	async toggleFavorite(userId: string, productId: string) {
 		const user = await this.getById(userId)
 
-		const isExists = user.favorites.some(product => product.id === productId)
+		if (!user) {
+			throw new NotFoundException('User not found')
+		}
+
+		const isExists =
+			user.favorites?.some(product => product.id === productId) || false
 
 		await this.prisma.user.update({
 			where: {
@@ -52,10 +59,17 @@ export class UserService {
 						id: productId
 					}
 				}
+			},
+			include: {
+				favorites: true,
+				productColors: { include: { color: true } },
+				productSizes: { include: { size: true } }
 			}
 		})
 
-		return true
+		return {
+			message: isExists ? 'Removed from favorites' : 'Added to favorites'
+		}
 	}
 
 	async create(dto: AuthDto) {

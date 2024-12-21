@@ -7,11 +7,13 @@ import {
 	Param,
 	Post,
 	Put,
+	Query,
 	UsePipes,
 	ValidationPipe
 } from '@nestjs/common'
-import { EnumProductType } from '@prisma/client'
+import { EnumGender, EnumProductType } from '@prisma/client'
 import { Auth } from 'src/auth/decorators/auth.decorator'
+import { FilterDto } from './dto/filter.dto'
 import { ProductDto } from './dto/product.dto'
 import { ProductService } from './product.service'
 
@@ -34,19 +36,47 @@ export class ProductController {
 		return this.productService.getByType(type)
 	}
 
-	@Get('by-style/:styleId')
-	async getByStyle(@Param('styleId') styleId: string) {
-		return this.productService.getByStyle(styleId)
+	@Get('by-style/:style')
+	async getByStyle(@Param('styleId') style: string) {
+		return this.productService.getByStyle(style)
+	}
+
+	@Get('by-styleId/:styleId')
+	async getByStyleId(@Param('styleId') styleId: string) {
+		return this.productService.getByStyleId(styleId)
+	}
+
+	@Get('by-category/:category')
+	async getByCategory(@Param('category') category: string) {
+		return this.productService.getByCategory(category)
+	}
+
+	@Get('by-categoryId/:categoryId')
+	async getByCategoryId(@Param('categoryId') categoryId: string) {
+		return this.productService.getByCategoryId(categoryId)
+	}
+
+	@Get('by-gender/:gender')
+	async getByGender(@Param('gender') gender: EnumGender) {
+		return this.productService.getByGender(gender)
+	}
+
+	@UsePipes(
+		new ValidationPipe({
+			transform: true,
+			whitelist: true
+		})
+	)
+	@Get('filtered')
+	async getFiltered(@Query() filterDto: FilterDto) {
+		return this.productService.getAllFiltered(filterDto)
 	}
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Auth()
-	@Post(':categoryId')
-	async create(
-		@Body() dto: ProductDto,
-		@Param('categoryId') categoryId: string
-	) {
+	@Post(':category')
+	async create(@Body() dto: ProductDto, @Param('category') categoryId: string) {
 		return this.productService.create(dto, categoryId)
 	}
 
@@ -73,10 +103,5 @@ export class ProductController {
 		@Body('userId') userId: string
 	) {
 		return this.productService.toggleFavorite(userId, productId)
-	}
-
-	@Get('by-category/:categoryId')
-	async getByCategory(@Param('categoryId') categoryId: string) {
-		return this.productService.getByCategory(categoryId)
 	}
 }

@@ -8,8 +8,13 @@ export class UserController {
 	constructor(private readonly userService: UserService) {}
 
 	@Auth()
-  @Get('profile')
+	@Get('profile')
 	async getProfile(@CurrentUser('id') id: string) {
+		return this.userService.getById(id)
+	}
+
+	@Get('by-id/:id')
+	async getById(@Param('id') id: string) {
 		return this.userService.getById(id)
 	}
 
@@ -19,6 +24,6 @@ export class UserController {
 		@CurrentUser('id') userId: string,
 		@Param('productId') productId: string
 	) {
-		return this.userService.toggleFavorite(productId, userId)
+		return this.userService.toggleFavorite(userId, productId)
 	}
 }
