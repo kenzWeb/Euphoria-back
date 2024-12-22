@@ -88,7 +88,12 @@ export class AuthService {
 				},
 				include: {
 					shippingAddress: true,
-					favorites: true,
+					favorites: {
+						include: {
+							productColors: { include: { color: true } },
+							productSizes: { include: { size: true } }
+						}
+					},
 					orders: true
 				}
 			})

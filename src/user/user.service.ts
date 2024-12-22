@@ -77,9 +77,7 @@ export class UserService {
 						productSizes: { include: { size: true } }
 					}
 				},
-				orders: true,
-				productColors: { include: { color: true } },
-				productSizes: { include: { size: true } }
+				orders: true
 			}
 		})
 
