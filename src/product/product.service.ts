@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { EnumGender, EnumProductType } from '@prisma/client'
+import { PaginationService } from 'src/pagination/pagination.service'
 import { PrismaService } from 'src/prisma.service'
 import { SizeDto } from 'src/size/dto/size.dto'
 import { EnumProductSort, FilterDto } from './dto/filter.dto'
@@ -7,14 +8,116 @@ import { ColorDto, ProductDto } from './dto/product.dto'
 
 @Injectable()
 export class ProductService {
-	constructor(private prisma: PrismaService) {}
+	constructor(
+		private prisma: PrismaService,
+		private paginationService: PaginationService
+	) {}
 
-	async getAll() {
+	async getAll(dto: FilterDto = {}) {
+		const { perPage, skip } = this.paginationService.getPagination(dto)
+
+		const filters = []
+
+		if (dto.category) {
+			const categories = dto.category.split('|')
+			filters.push({
+				category: {
+					name: {
+						in: categories,
+						mode: 'insensitive'
+					}
+				}
+			})
+		}
+		if (dto.style) {
+			const styles = dto.style.split('|')
+			filters.push({
+				dressStyle: {
+					name: {
+						in: styles,
+						mode: 'insensitive'
+					}
+				}
+			})
+		}
+
+		if (dto.categoryId) filters.push({ categoryId: dto.categoryId })
+		if (dto.styleId) filters.push({ styleId: dto.styleId })
+		if (dto.gender) {
+			filters.push({
+				gender: EnumGender[dto.gender.toUpperCase() as keyof typeof EnumGender]
+			})
+		}
+
+		if (dto.minPrice || dto.maxPrice) {
+			filters.push({
+				price: {
+					...(dto.minPrice ? { gte: +dto.minPrice } : {}),
+					...(dto.maxPrice ? { lte: +dto.maxPrice } : {})
+				}
+			})
+		}
+
+		if (dto.colors) {
+			const colors =
+				typeof dto.colors === 'string' ? dto.colors.split('|') : dto.colors
+			filters.push({
+				productColors: {
+					some: {
+						color: {
+							OR: [
+								{ id: { in: colors } },
+								{ name: { in: colors, mode: 'insensitive' } }
+							]
+						}
+					}
+				}
+			})
+		}
+
+		if (dto.sizes) {
+			const sizes =
+				typeof dto.sizes === 'string' ? dto.sizes.split('|') : dto.sizes
+			filters.push({
+				productSizes: {
+					some: {
+						size: {
+							OR: [
+								{ id: { in: sizes } },
+								{ name: { in: sizes, mode: 'insensitive' } }
+							]
+						}
+					}
+				}
+			})
+		}
+
+		const orderBy = []
+
+		switch (dto.sort) {
+			case EnumProductSort.HIGH_PRICE:
+				orderBy.push({ price: 'desc' })
+				break
+			case EnumProductSort.LOW_PRICE:
+				orderBy.push({ price: 'asc' })
+				break
+			case EnumProductSort.NEWEST:
+				orderBy.push({ createdAt: 'desc' })
+				break
+			case EnumProductSort.OLDEST:
+				orderBy.push({ createdAt: 'asc' })
+				break
+		}
+
 		return this.prisma.product.findMany({
+			where: filters.length ? { AND: filters } : {},
+			orderBy: orderBy.length ? orderBy : undefined,
+			skip,
+			take: perPage,
 			include: {
 				category: true,
-				orderItems: true,
 				dressStyle: true,
+				orderItems: true,
 				productColors: { include: { color: true } },
 				productSizes: { include: { size: true } }
 			}
@@ -159,86 +262,6 @@ export class ProductService {
 		})
 	}
 
-	async getAllFiltered(dto: FilterDto) {
-		const filters = []
-
-		if (dto.category) filters.push({ category: { name: dto.category } })
-		if (dto.categoryId) filters.push({ categoryId: dto.categoryId })
-		if (dto.style) filters.push({ dressStyle: { name: dto.style } })
-		if (dto.styleId) filters.push({ styleId: dto.styleId })
-		if (dto.gender) filters.push({ gender: dto.gender })
-
-		if (dto.minPrice || dto.maxPrice) {
-			filters.push({
-				price: {
-					...(dto.minPrice ? { gte: +dto.minPrice } : {}),
-					...(dto.maxPrice ? { lte: +dto.maxPrice } : {})
-				}
-			})
-		}
-
-		if (dto.colors) {
-			filters.push({
-				productColors: {
-					some: {
-						color: {
-							OR: [
-								{ id: { in: dto.colors } },
-								{ name: { in: dto.colors, mode: 'insensitive' } }
-							]
-						}
-					}
-				}
-			})
-		}
-
-		if (dto.sizes) {
-			filters.push({
-				productSizes: {
-					some: {
-						size: {
-							OR: [
-								{ id: { in: dto.sizes } },
-								{ name: { in: dto.sizes, mode: 'insensitive' } }
-							]
-						}
-					}
-				}
-			})
-		}
-
-		const orderBy = []
-
-		switch (dto.sort) {
-			case EnumProductSort.HIGH_PRICE:
-				orderBy.push({ price: 'desc' })
-				break
-			case EnumProductSort.LOW_PRICE:
-				orderBy.push({ price: 'asc' })
-				break
-			case EnumProductSort.NEWEST:
-				orderBy.push({ createdAt: 'desc' })
-				break
-			case EnumProductSort.OLDEST:
-				orderBy.push({ createdAt: 'asc' })
-				break
-		}
-
-		return this.prisma.product.findMany({
-			where: {
-				AND: filters
-			},
-			orderBy,
-			include: {
-				category: true,
-				dressStyle: true,
-				orderItems: true,
-				productColors: { include: { color: true } },
-				productSizes: { include: { size: true } }
-			}
-		})
-	}
-
 	async update(id: string, dto: ProductDto) {
 		await this.getById(id)
 
@@ -259,28 +282,6 @@ export class ProductService {
 				productSizes: { deleteMany: {}, create: sizeConnect }
 			}
 		})
-	}
-
-	async toggleFavorite(userId: string, productId: string) {
-		const user = await this.prisma.user.findUnique({
-			where: { id: userId },
-			include: { favorites: true }
-		})
-
-		const isExists = user.favorites.some(product => product.id === productId)
-
-		await this.prisma.user.update({
-			where: { id: user.id },
-			data: {
-				favorites: {
-					[isExists ? 'disconnect' : 'connect']: {
-						id: productId
-					}
-				}
-			},
-		})
-
-		return { message: 'Success' }
 	}
 
 	async delete(id: string) {

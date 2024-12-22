@@ -8,6 +8,7 @@ import { ColorModule } from './color/color.module'
 import { DressStyleModule } from './dress-style/dress-style.module'
 import { FileModule } from './file/file.module'
 import { OrderModule } from './order/order.module'
+import { PaginationModule } from './pagination/pagination.module'
 import { ProductModule } from './product/product.module'
 import { ShippingAddressModule } from './shipping-address/shipping-address.module'
 import { SizeModule } from './size/size.module'
@@ -28,7 +29,8 @@ import { ZoneModule } from './zone/zone.module'
 		ShippingAddressModule,
 		ArrivalModule,
 		ZoneModule,
-		FileModule
+		FileModule,
+		PaginationModule
 	]
 })
 export class AppModule {}

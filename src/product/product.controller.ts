@@ -22,8 +22,8 @@ export class ProductController {
 	constructor(private readonly productService: ProductService) {}
 
 	@Get()
-	async getAll() {
-		return this.productService.getAll()
+	async getAll(@Query() dto: FilterDto = {}) {
+		return this.productService.getAll(dto)
 	}
 
 	@Get('by-id/:id')
@@ -67,11 +67,6 @@ export class ProductController {
 			whitelist: true
 		})
 	)
-	@Get('filtered')
-	async getFiltered(@Query() filterDto: FilterDto) {
-		return this.productService.getAllFiltered(filterDto)
-	}
-
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Auth()
@@ -93,15 +88,5 @@ export class ProductController {
 	@Delete(':id')
 	async delete(@Param('id') id: string) {
 		return this.productService.delete(id)
-	}
-
-	@HttpCode(200)
-	@Auth()
-	@Post('favorites/:productId')
-	async favorites(
-		@Param('productId') productId: string,
-		@Body('userId') userId: string
-	) {
-		return this.productService.toggleFavorite(userId, productId)
 	}
 }

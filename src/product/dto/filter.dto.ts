@@ -1,5 +1,6 @@
 import { EnumGender } from '@prisma/client'
 import { IsEnum, IsOptional, IsString } from 'class-validator'
+import { PaginationDto } from 'src/pagination/pagination.dto'
 
 export enum EnumProductSort {
 	HIGH_PRICE = 'high-price',
@@ -8,7 +9,7 @@ export enum EnumProductSort {
 	OLDEST = 'oldest'
 }
 
-export class FilterDto {
+export class FilterDto extends PaginationDto {
 	@IsOptional()
 	@IsString()
 	categoryId?: string
@@ -39,11 +40,11 @@ export class FilterDto {
 
 	@IsOptional()
 	@IsString({ each: true })
-	colors?: string[]
+	colors?: string | string[]
 
 	@IsOptional()
 	@IsString({ each: true })
-	sizes?: string[]
+	sizes?: string | string[]
 
 	@IsOptional()
 	@IsEnum(EnumProductSort)

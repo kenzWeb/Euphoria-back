@@ -13,7 +13,12 @@ export class UserService {
 				id
 			},
 			include: {
-				favorites: true,
+				favorites: {
+					include: {
+						productColors: { include: { color: true } },
+						productSizes: { include: { size: true } }
+					}
+				},
 				orders: true,
 				productColors: { include: { color: true } },
 				productSizes: { include: { size: true } },
@@ -30,7 +35,12 @@ export class UserService {
 				email
 			},
 			include: {
-				favorites: true,
+				favorites: {
+					include: {
+						productColors: { include: { color: true } },
+						productSizes: { include: { size: true } }
+					}
+				},
 				orders: true,
 				shippingAddress: true
 			}
@@ -61,7 +71,13 @@ export class UserService {
 				}
 			},
 			include: {
-				favorites: true,
+				favorites: {
+					include: {
+						productColors: { include: { color: true } },
+						productSizes: { include: { size: true } }
+					}
+				},
+				orders: true,
 				productColors: { include: { color: true } },
 				productSizes: { include: { size: true } }
 			}
