@@ -49,4 +49,8 @@ export class FilterDto extends PaginationDto {
 	@IsOptional()
 	@IsEnum(EnumProductSort)
 	sort?: EnumProductSort
+
+	@IsOptional()
+	@IsString()
+	searchTerm?: string
 }

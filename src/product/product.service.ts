@@ -18,6 +18,25 @@ export class ProductService {
 
 		const filters = []
 
+		if (dto.searchTerm) {
+			filters.push({
+				OR: [
+					{
+						name: {
+							contains: dto.searchTerm,
+							mode: 'insensitive'
+						}
+					},
+					{
+						description: {
+							contains: dto.searchTerm,
+							mode: 'insensitive'
+						}
+					}
+				]
+			})
+		}
+
 		if (dto.category) {
 			const categories = dto.category.split('|')
 			filters.push({
@@ -109,7 +128,7 @@ export class ProductService {
 				break
 		}
 
-		return this.prisma.product.findMany({
+		const data = await this.prisma.product.findMany({
 			where: filters.length ? { AND: filters } : {},
 			orderBy: orderBy.length ? orderBy : undefined,
 			skip,
@@ -122,6 +141,15 @@ export class ProductService {
 				productSizes: { include: { size: true } }
 			}
 		})
+
+		const length = await this.prisma.product.count({
+			where: filters.length ? { AND: filters } : {}
+		})
+
+		return {
+			data,
+			length
+		}
 	}
 
 	async getById(id: string) {

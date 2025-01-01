@@ -6,7 +6,6 @@ export const CurrentUser = createParamDecorator(
 		const request = ctx.switchToHttp().getRequest()
 		const user = request.user
 
-		console.log('Debug user:', user);
 		return data ? user[data] : user
 	}
 )
