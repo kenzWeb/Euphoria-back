@@ -61,6 +61,11 @@ export class ProductController {
 		return this.productService.getByGender(gender)
 	}
 
+	@Get('similar/:id')
+	async getSimilar(@Param('id') id: string) {
+		return this.productService.getSimilar(id)
+	}
+
 	@UsePipes(
 		new ValidationPipe({
 			transform: true,

@@ -264,6 +264,25 @@ export class ProductService {
 		return data
 	}
 
+	async getSimilar(id: string) {
+		const product = await this.getById(id)
+
+		const data = await this.prisma.product.findMany({
+			where: {
+				AND: [{ categoryId: product.categoryId }, { id: { not: id } }]
+			},
+			take: 4,
+			include: {
+				category: true,
+				productColors: { include: { color: true } },
+				productSizes: { include: { size: true } }
+			},
+			orderBy: { createdAt: 'desc' }
+		})
+
+		return data
+	}
+
 	async create(dto: ProductDto, categoryId?: string) {
 		const colorConnect =
 			dto.colors?.map((color: ColorDto) => ({
