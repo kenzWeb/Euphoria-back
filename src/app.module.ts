@@ -14,6 +14,7 @@ import { ShippingAddressModule } from './shipping-address/shipping-address.modul
 import { SizeModule } from './size/size.module'
 import { UserModule } from './user/user.module'
 import { ZoneModule } from './zone/zone.module'
+import { CodeModule } from './code/code.module';
 
 @Module({
 	imports: [
@@ -30,7 +31,8 @@ import { ZoneModule } from './zone/zone.module'
 		ArrivalModule,
 		ZoneModule,
 		FileModule,
-		PaginationModule
+		PaginationModule,
+		CodeModule
 	]
 })
 export class AppModule {}
