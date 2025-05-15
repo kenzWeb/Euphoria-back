@@ -21,7 +21,7 @@ export class CodeService {
 	}
 
 	async getCode(code: string) {
-		if (!code) {
+		if (!code && !code.length) {
 			throw new BadRequestException('Promo code must be provided')
 		}
 

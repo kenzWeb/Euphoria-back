@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config'
 import { ArrivalModule } from './arrival/arrival.module'
 import { AuthModule } from './auth/auth.module'
 import { CategoryModule } from './category/category.module'
+import { CodeModule } from './code/code.module'
 import { ColorModule } from './color/color.module'
 import { DressStyleModule } from './dress-style/dress-style.module'
 import { FileModule } from './file/file.module'
@@ -14,7 +15,7 @@ import { ShippingAddressModule } from './shipping-address/shipping-address.modul
 import { SizeModule } from './size/size.module'
 import { UserModule } from './user/user.module'
 import { ZoneModule } from './zone/zone.module'
-import { CodeModule } from './code/code.module';
+import { BillingModule } from './billing/billing.module';
 
 @Module({
 	imports: [
@@ -32,7 +33,8 @@ import { CodeModule } from './code/code.module';
 		ZoneModule,
 		FileModule,
 		PaginationModule,
-		CodeModule
+		CodeModule,
+		BillingModule
 	]
 })
 export class AppModule {}

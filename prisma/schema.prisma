@@ -30,6 +30,7 @@ model User {
 
   productColors ProductColor[]
   productSizes  ProductSize[]
+  Billing       Billing?
 
   @@map("user")
 }
@@ -228,6 +229,27 @@ model PromoCode {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("promo_code")
+}
+
+model Billing {
+  id            String  @id @default(cuid()) @map("id")
+  firstName     String  @map("first_name")
+  lastName      String  @map("last_name")
+  country       String
+  company       String?
+  streetAddress String  @map("street_address")
+  apartment     String?
+  city          String
+  postalCode    String  @map("postal_code")
+  phone         String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String? @unique @map("user_id")
+
+  @@map("billing")
 }
 
 enum EnumGender {
