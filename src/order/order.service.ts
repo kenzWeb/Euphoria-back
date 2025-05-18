@@ -1,7 +1,9 @@
-import { YooCheckout } from '@a2seven/yoo-checkout'
+import { ICapturePayment, YooCheckout } from '@a2seven/yoo-checkout'
 import { Injectable } from '@nestjs/common'
+import { OrderStatus } from '@prisma/client'
 import { PrismaService } from 'src/prisma.service'
 import { OrderDto } from './dto/order.dto'
+import { PaymentStatusDto } from './dto/payment-status.dto'
 
 const checkout = new YooCheckout({
 	shopId: process.env['YOOKASSA_SHOP_ID'],
@@ -59,5 +61,53 @@ export class OrderService {
 		})
 
 		return payment
+	}
+
+	async updateStatus(dto: PaymentStatusDto) {
+		if (dto.event === 'payment.waiting_for_capture') {
+			const capturePayment: ICapturePayment = {
+				amount: {
+					value: dto.object.amount.value,
+					currency: dto.object.amount.currency
+				}
+			}
+
+			return checkout.capturePayment(dto.object.id, capturePayment)
+		}
+
+		if (dto.event === 'payment.succeeded') {
+			const orderId = dto.object.description.split('#')[1]
+
+			await this.prisma.order.update({
+				where: {
+					id: orderId
+				},
+				data: {
+					status: OrderStatus.PAYED
+				}
+			})
+
+			return true
+		}
+
+		return true
+	}
+
+	async getMyOrders(userId: string) {
+		return this.prisma.order.findMany({
+			where: {
+				userId
+			},
+			include: {
+				items: {
+					include: {
+						product: true
+					}
+				}
+			},
+			orderBy: {
+				createdAt: 'desc'
+			}
+		})
 	}
 }
