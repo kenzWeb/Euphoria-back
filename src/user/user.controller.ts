@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Patch } from '@nestjs/common'
+import { Controller, Get, Param, Patch, Post } from '@nestjs/common'
 import { Auth } from 'src/auth/decorators/auth.decorator'
 import { CurrentUser } from './decorators/user.decorators'
 import { UserService } from './user.service'
@@ -25,5 +25,11 @@ export class UserController {
 		@Param('productId') productId: string
 	) {
 		return this.userService.toggleFavorite(userId, productId)
+	}
+
+	@Auth()
+	@Post('change-name')
+	async changeName(@CurrentUser('id') userId: string, name: string) {
+		return this.userService.changeName(userId, name)
 	}
 }

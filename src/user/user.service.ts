@@ -86,6 +86,21 @@ export class UserService {
 		}
 	}
 
+	async changeName(userId: string, name: string) {
+		const user = await this.getById(userId)
+		if (!user) {
+			throw new NotFoundException('User not found')
+		}
+		return this.prisma.user.update({
+			where: {
+				id: userId
+			},
+			data: {
+				name
+			}
+		})
+	}
+
 	async create(dto: AuthDto) {
 		return this.prisma.user.create({
 			data: {
