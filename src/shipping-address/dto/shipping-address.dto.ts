@@ -1,5 +1,5 @@
 import {
-	IsEmpty,
+	IsNotEmpty,
 	IsOptional,
 	IsString,
 	MaxLength,
@@ -10,18 +10,18 @@ export class ShippingAddressDto {
 	@MaxLength(50)
 	@MinLength(2)
 	@IsString()
-	@IsEmpty()
+	@IsNotEmpty()
 	firstName: string
 
 	@MaxLength(50)
 	@MinLength(2)
 	@IsString()
-	@IsEmpty()
+	@IsNotEmpty()
 	lastName: string
 
 	@MaxLength(50)
 	@MinLength(2)
-	@IsEmpty()
+	@IsNotEmpty()
 	@IsString()
 	region: string
 
@@ -34,37 +34,37 @@ export class ShippingAddressDto {
 	@MaxLength(50)
 	@MinLength(2)
 	@IsString()
-	@IsEmpty()
+	@IsNotEmpty()
 	streetAddress: string
 
 	@MaxLength(50)
 	@MinLength(2)
 	@IsString()
-	@IsEmpty()
+	@IsNotEmpty()
 	suite: string
 
 	@MaxLength(50)
 	@MinLength(2)
 	@IsString()
-	@IsEmpty()
+	@IsNotEmpty()
 	city: string
 
 	@MaxLength(50)
 	@MinLength(2)
 	@IsString()
-	@IsEmpty()
+	@IsNotEmpty()
 	state: string
 
 	@MaxLength(50)
 	@MinLength(2)
 	@IsString()
-	@IsEmpty()
+	@IsNotEmpty()
 	phone: string
 
 	@MaxLength(50)
 	@MinLength(2)
 	@IsString()
-	@IsEmpty()
+	@IsNotEmpty()
 	postalCode: string
 
 	@MaxLength(200)

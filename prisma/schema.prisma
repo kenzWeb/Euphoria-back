@@ -172,17 +172,23 @@ model Size {
 
 model ShippingAddress {
   id            String  @id @default(cuid()) @map("id")
+  firstName     String  @map("first_name")
+  lastName      String  @map("last_name")
+  region        String
+  company       String?
   streetAddress String  @map("street_address")
-  apartment     String?
+  suite         String
   city          String
   state         String
+  phone         String
   postalCode    String  @map("postal_code")
+  instruction   String?
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   user   User?   @relation(fields: [userId], references: [id])
-  userId String? @unique @map("user_id")
+  userId String? @map("user_id")
 
   @@map("shipping_address")
 }

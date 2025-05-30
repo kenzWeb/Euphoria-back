@@ -14,21 +14,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p1000cdrxzn0n6cg6x' } },
-		dressStyle: { connect: { id: 'cm4vpnff00000qo6t0c2f7pc8' } },
+		category: { connect: { id: 'cmbaxlga30002c9751jyqb7dp' } }, // Activewear
+		dressStyle: { connect: { id: 'cmbaxlmyj0005c99vofgehrq3' } }, // Sport
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0002uiydc03b8pps' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0001uiydneanb22w' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0005uiydbpxr01ik' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0006uiydykta326u' } } }
+				{ color: { connect: { id: 'cmbaxl03b0008c909vgc0kk90' } } }, // Black
+				{ color: { connect: { id: 'cmbaxl03b0001c909xonlylsn' } } }, // White
+				{ color: { connect: { id: 'cmbaxl03b0003c9091qzoql3z' } } }, // Grey
+				{ color: { connect: { id: 'cmbaxl03b0007c909ws2a7yi2' } } } // Navy
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00023z49fr0w6hdo' } } },
-				{ size: { connect: { id: 'cm4vq56zl00013z49tbk0xbgy' } } },
-				{ size: { connect: { id: 'cm4vq56zl00063z49zkqul59x' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0008c93xd6f2en48' } } }, // M
+				{ size: { connect: { id: 'cmbaxl8bd0006c93x0dpsfmj7' } } }, // L
+				{ size: { connect: { id: 'cmbaxl8bd0007c93xj5oyujvq' } } } // XL
 			]
 		}
 	},
@@ -45,21 +45,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p10008drxznmeq1w8k' } },
-		dressStyle: { connect: { id: 'cm4vpnff00001qo6t3ndjqelr' } },
+		category: { connect: { id: 'cmbaxlga30006c9752v6vn5tw' } }, // Joggers
+		dressStyle: { connect: { id: 'cmbaxlmyj0004c99vt98d8udr' } }, // Casual
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0001uiydneanb22w' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0006uiydykta326u' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0005uiydbpxr01ik' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0006uiydykta326u' } } }
+				{ color: { connect: { id: 'cmbaxl03b0003c9091qzoql3z' } } }, // Grey
+				{ color: { connect: { id: 'cmbaxl03b0005c9091kfpv8f1' } } }, // Black
+				{ color: { connect: { id: 'cmbaxl03b0007c909ws2a7yi2' } } }, // White
+				{ color: { connect: { id: 'cmbaxl03b000bc909r2lwuyvo' } } } // Navy
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00063z49zkqul59x' } } },
-				{ size: { connect: { id: 'cm4vq56zl00013z49tbk0xbgy' } } },
-				{ size: { connect: { id: 'cm4vq56zl00043z49716lfxzs' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0005c93xec235sa3' } } }, // S
+				{ size: { connect: { id: 'cmbaxl8bd0002c93xxognwdtu' } } }, // M
+				{ size: { connect: { id: 'cmbaxl8bd0000c93xzlnofjr6' } } } // L
 			]
 		}
 	},
@@ -76,21 +76,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p10007drxz7z8t79pe' } },
-		dressStyle: { connect: { id: 'cm4vpnff00005qo6tuvko6q41' } },
+		category: { connect: { id: 'cmbaxlga3000dc975as9g6buv' } }, // Tops
+		dressStyle: { connect: { id: 'cmbaxlmyj0001c99vh7fqwdzv' } }, // Sport
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0008uiydqvima3do' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0006uiydykta326u' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0008uiydqvima3do' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0009uiydqj0gbaqg' } } }
+				{ color: { connect: { id: 'cmbaxl03b0005c9091kfpv8f1' } } }, // Black
+				{ color: { connect: { id: 'cmbaxl03b0003c9091qzoql3z' } } }, // Grey
+				{ color: { connect: { id: 'cmbaxl03a0000c909om9r1nse' } } }, // Navy
+				{ color: { connect: { id: 'cmbaxl03b0005c9091kfpv8f1' } } } // White
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00073z49cxnip7le' } } },
-				{ size: { connect: { id: 'cm4vq56zl00013z49tbk0xbgy' } } },
-				{ size: { connect: { id: 'cm4vq56zk00003z49dvtvycmg' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0003c93xn10b41wr' } } }, // S
+				{ size: { connect: { id: 'cmbaxl8bd0005c93xec235sa3' } } }, // M
+				{ size: { connect: { id: 'cmbaxl8bd0004c93xz3vwzt78' } } } // L
 			]
 		}
 	},
@@ -107,21 +107,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p10000drxz7iuahxu4' } },
-		dressStyle: { connect: { id: 'cm4vpnff00003qo6t5ivbsvmt' } },
+		category: { connect: { id: 'cmbaxlga30004c975pbp1rlnz' } }, // Tops
+		dressStyle: { connect: { id: 'cmbaxlmyj0002c99vkz3tzumf' } }, // Elegant
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0007uiyd9f9ti7ar' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0002uiydc03b8pps' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0009uiydqj0gbaqg' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000buiydrh173a9a' } } }
+				{ color: { connect: { id: 'cmbaxl03b0005c9091kfpv8f1' } } }, // Blue Purple
+				{ color: { connect: { id: 'cmbaxl03b0004c9097b29s9xr' } } }, // Purple
+				{ color: { connect: { id: 'cmbaxl03b0006c909rbn1vaq6' } } }, // Pink
+				{ color: { connect: { id: 'cmbaxl03b0009c90913roxw78' } } } // White
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00053z49eq82x818' } } },
-				{ size: { connect: { id: 'cm4vq56zl00043z49716lfxzs' } } },
-				{ size: { connect: { id: 'cm4vq56zl00033z49gzgs3pxi' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0008c93xd6f2en48' } } }, // XS
+				{ size: { connect: { id: 'cmbaxl8bd0002c93xxognwdtu' } } }, // S
+				{ size: { connect: { id: 'cmbaxl8bd0006c93x0dpsfmj7' } } } // M
 			]
 		}
 	},
@@ -138,21 +138,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p10004drxzi13wbelc' } },
-		dressStyle: { connect: { id: 'cm4vpnff00000qo6t0c2f7pc8' } },
+		category: { connect: { id: 'cmbaxlga30003c97512xh9vgy' } }, // Boxers
+		dressStyle: { connect: { id: 'cmbaxlmyj0003c99vxi5gzt1e' } }, // Classic
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0005uiydbpxr01ik' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0006uiydykta326u' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0009uiydqj0gbaqg' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000buiydrh173a9a' } } }
+				{ color: { connect: { id: 'cmbaxl03b0002c909ypzpaczy' } } }, // White
+				{ color: { connect: { id: 'cmbaxl03b000ac909z3s8i3ja' } } }, // Black
+				{ color: { connect: { id: 'cmbaxl03b0007c909ws2a7yi2' } } }, // Grey
+				{ color: { connect: { id: 'cmbaxl03b0008c909vgc0kk90' } } } // Navy
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00043z49716lfxzs' } } },
-				{ size: { connect: { id: 'cm4vq56zl00053z49eq82x818' } } },
-				{ size: { connect: { id: 'cm4vq56zl00083z49uprk2k19' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0004c93xz3vwzt78' } } }, // M
+				{ size: { connect: { id: 'cmbaxl8bd0005c93xec235sa3' } } }, // L
+				{ size: { connect: { id: 'cmbaxl8bd0005c93xec235sa3' } } } // XL
 			]
 		}
 	},
@@ -169,21 +169,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p10001drxza6r5efwd' } },
-		dressStyle: { connect: { id: 'cm4vpnff00002qo6teyyu33pt' } },
+		category: { connect: { id: 'cmbaxlga3000ec975b8p5r7xc' } },
+		dressStyle: { connect: { id: 'cmbaxlmyj0001c99vh7fqwdzv' } },
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0004uiydkjesgon4' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0008uiydqvima3do' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000auiydobchwscq' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0006uiydykta326u' } } }
+				{ color: { connect: { id: 'cmbaxl03b0004c9097b29s9xr' } } },
+				{ color: { connect: { id: 'cmbaxl03a0000c909om9r1nse' } } },
+				{ color: { connect: { id: 'cmbaxl03b0002c909ypzpaczy' } } },
+				{ color: { connect: { id: 'cmbaxl03b0008c909vgc0kk90' } } }
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00023z49fr0w6hdo' } } },
-				{ size: { connect: { id: 'cm4vq56zl00043z49716lfxzs' } } },
-				{ size: { connect: { id: 'cm4vq56zl00063z49zkqul59x' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0001c93x1utnk869' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0000c93xzlnofjr6' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0000c93xzlnofjr6' } } }
 			]
 		}
 	},
@@ -200,21 +200,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p1000ddrxz5559z52k' } },
-		dressStyle: { connect: { id: 'cm4vpnff00002qo6teyyu33pt' } },
+		category: { connect: { id: 'cmbaxlga30003c97512xh9vgy' } },
+		dressStyle: { connect: { id: 'cmbaxlmyj0003c99vxi5gzt1e' } },
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0009uiydqj0gbaqg' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0008uiydqvima3do' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000auiydobchwscq' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000buiydrh173a9a' } } }
+				{ color: { connect: { id: 'cmbaxl03b0006c909rbn1vaq6' } } },
+				{ color: { connect: { id: 'cmbaxl03b000bc909r2lwuyvo' } } },
+				{ color: { connect: { id: 'cmbaxl03b0004c9097b29s9xr' } } },
+				{ color: { connect: { id: 'cmbaxl03b000bc909r2lwuyvo' } } }
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00023z49fr0w6hdo' } } },
-				{ size: { connect: { id: 'cm4vq56zl00043z49716lfxzs' } } },
-				{ size: { connect: { id: 'cm4vq56zl00063z49zkqul59x' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0001c93x1utnk869' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0007c93xj5oyujvq' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0006c93x0dpsfmj7' } } }
 			]
 		}
 	},
@@ -231,21 +231,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p10002drxzmeligjk2' } },
-		dressStyle: { connect: { id: 'cm4vpnff00003qo6t5ivbsvmt' } },
+		category: { connect: { id: 'cmbaxlga30004c975pbp1rlnz' } },
+		dressStyle: { connect: { id: 'cmbaxlmyj0002c99vkz3tzumf' } },
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0006uiydykta326u' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000buiydrh173a9a' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0002uiydc03b8pps' } } },
-				{ color: { connect: { id: 'cm4vpmu1c0000uiydqbipzvzi' } } }
+				{ color: { connect: { id: 'cmbaxl03b0005c9091kfpv8f1' } } },
+				{ color: { connect: { id: 'cmbaxl03b0008c909vgc0kk90' } } },
+				{ color: { connect: { id: 'cmbaxl03b0007c909ws2a7yi2' } } },
+				{ color: { connect: { id: 'cmbaxl03b0008c909vgc0kk90' } } }
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zk00003z49dvtvycmg' } } },
-				{ size: { connect: { id: 'cm4vq56zl00023z49fr0w6hdo' } } },
-				{ size: { connect: { id: 'cm4vq56zl00033z49gzgs3pxi' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0004c93xz3vwzt78' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0008c93xd6f2en48' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0002c93xxognwdtu' } } }
 			]
 		}
 	},
@@ -262,21 +262,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p10001drxza6r5efwd' } },
-		dressStyle: { connect: { id: 'cm4vpnff00001qo6t3ndjqelr' } },
+		category: { connect: { id: 'cmbaxlga3000cc975ajgmalmr' } },
+		dressStyle: { connect: { id: 'cmbaxlmyj0005c99vofgehrq3' } },
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0004uiydkjesgon4' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0008uiydqvima3do' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000auiydobchwscq' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000buiydrh173a9a' } } }
+				{ color: { connect: { id: 'cmbaxl03b0001c909xonlylsn' } } },
+				{ color: { connect: { id: 'cmbaxl03a0000c909om9r1nse' } } },
+				{ color: { connect: { id: 'cmbaxl03b0002c909ypzpaczy' } } },
+				{ color: { connect: { id: 'cmbaxl03b000bc909r2lwuyvo' } } }
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00023z49fr0w6hdo' } } },
-				{ size: { connect: { id: 'cm4vq56zl00073z49cxnip7le' } } },
-				{ size: { connect: { id: 'cm4vq56zl00083z49uprk2k19' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0008c93xd6f2en48' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0004c93xz3vwzt78' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0004c93xz3vwzt78' } } }
 			]
 		}
 	},
@@ -293,21 +293,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p1000adrxza2ren8w9' } },
-		dressStyle: { connect: { id: 'cm4vpnff00002qo6teyyu33pt' } },
+		category: { connect: { id: 'cmbaxlga20000c975140xqaab' } },
+		dressStyle: { connect: { id: 'cmbaxlmyj0001c99vh7fqwdzv' } },
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0005uiydbpxr01ik' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0007uiyd9f9ti7ar' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0001uiydneanb22w' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0002uiydc03b8pps' } } }
+				{ color: { connect: { id: 'cmbaxl03b0003c9091qzoql3z' } } },
+				{ color: { connect: { id: 'cmbaxl03b0004c9097b29s9xr' } } },
+				{ color: { connect: { id: 'cmbaxl03b000ac909z3s8i3ja' } } },
+				{ color: { connect: { id: 'cmbaxl03a0000c909om9r1nse' } } }
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00033z49gzgs3pxi' } } },
-				{ size: { connect: { id: 'cm4vq56zl00053z49eq82x818' } } },
-				{ size: { connect: { id: 'cm4vq56zl00063z49zkqul59x' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0005c93xec235sa3' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0001c93x1utnk869' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0002c93xxognwdtu' } } }
 			]
 		}
 	},
@@ -324,21 +324,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p10006drxzkui8c9tc' } },
-		dressStyle: { connect: { id: 'cm4vpnff00000qo6t0c2f7pc8' } },
+		category: { connect: { id: 'cmbaxlga30009c975ctgtjggd' } },
+		dressStyle: { connect: { id: 'cmbaxlmyj0002c99vkz3tzumf' } },
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0005uiydbpxr01ik' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0008uiydqvima3do' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000buiydrh173a9a' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0002uiydc03b8pps' } } }
+				{ color: { connect: { id: 'cmbaxl03b0004c9097b29s9xr' } } },
+				{ color: { connect: { id: 'cmbaxl03b000ac909z3s8i3ja' } } },
+				{ color: { connect: { id: 'cmbaxl03b000bc909r2lwuyvo' } } },
+				{ color: { connect: { id: 'cmbaxl03b0006c909rbn1vaq6' } } }
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00013z49tbk0xbgy' } } },
-				{ size: { connect: { id: 'cm4vq56zl00043z49716lfxzs' } } },
-				{ size: { connect: { id: 'cm4vq56zl00083z49uprk2k19' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0002c93xxognwdtu' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0005c93xec235sa3' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0000c93xzlnofjr6' } } }
 			]
 		}
 	},
@@ -355,21 +355,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p1000adrxza2ren8w9' } },
-		dressStyle: { connect: { id: 'cm4vpnff00001qo6t3ndjqelr' } },
+		category: { connect: { id: 'cmbaxlga3000ac975gkvex42g' } },
+		dressStyle: { connect: { id: 'cmbaxlmyj0002c99vkz3tzumf' } },
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0003uiydx9uhfu5m' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0007uiyd9f9ti7ar' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000auiydobchwscq' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0002uiydc03b8pps' } } }
+				{ color: { connect: { id: 'cmbaxl03a0000c909om9r1nse' } } },
+				{ color: { connect: { id: 'cmbaxl03b0005c9091kfpv8f1' } } },
+				{ color: { connect: { id: 'cmbaxl03a0000c909om9r1nse' } } },
+				{ color: { connect: { id: 'cmbaxl03a0000c909om9r1nse' } } }
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00013z49tbk0xbgy' } } },
-				{ size: { connect: { id: 'cm4vq56zl00033z49gzgs3pxi' } } },
-				{ size: { connect: { id: 'cm4vq56zl00073z49cxnip7le' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0008c93xd6f2en48' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0008c93xd6f2en48' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0001c93x1utnk869' } } }
 			]
 		}
 	},
@@ -386,21 +386,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p10002drxzmeligjk2' } },
-		dressStyle: { connect: { id: 'cm4vpnff00002qo6teyyu33pt' } },
+		category: { connect: { id: 'cmbaxlga30001c975gubnw81v' } },
+		dressStyle: { connect: { id: 'cmbaxlmyj0003c99vxi5gzt1e' } },
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0006uiydykta326u' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0008uiydqvima3do' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000buiydrh173a9a' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0007uiyd9f9ti7ar' } } }
+				{ color: { connect: { id: 'cmbaxl03b0001c909xonlylsn' } } },
+				{ color: { connect: { id: 'cmbaxl03b0006c909rbn1vaq6' } } },
+				{ color: { connect: { id: 'cmbaxl03b0008c909vgc0kk90' } } },
+				{ color: { connect: { id: 'cmbaxl03b0008c909vgc0kk90' } } }
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00053z49eq82x818' } } },
-				{ size: { connect: { id: 'cm4vq56zl00063z49zkqul59x' } } },
-				{ size: { connect: { id: 'cm4vq56zl00083z49uprk2k19' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0006c93x0dpsfmj7' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0005c93xec235sa3' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0005c93xec235sa3' } } }
 			]
 		}
 	},
@@ -417,21 +417,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p10009drxzhpw13put' } },
-		dressStyle: { connect: { id: 'cm4vpnff00002qo6teyyu33pt' } },
+		category: { connect: { id: 'cmbaxlga30008c9750j44nab1' } },
+		dressStyle: { connect: { id: 'cmbaxlmyj0004c99vt98d8udr' } },
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0006uiydykta326u' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0003uiydx9uhfu5m' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000buiydrh173a9a' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000buiydrh173a9a' } } }
+				{ color: { connect: { id: 'cmbaxl03b000ac909z3s8i3ja' } } },
+				{ color: { connect: { id: 'cmbaxl03b0001c909xonlylsn' } } },
+				{ color: { connect: { id: 'cmbaxl03b000ac909z3s8i3ja' } } },
+				{ color: { connect: { id: 'cmbaxl03b0004c9097b29s9xr' } } }
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00053z49eq82x818' } } },
-				{ size: { connect: { id: 'cm4vq56zk00003z49dvtvycmg' } } },
-				{ size: { connect: { id: 'cm4vq56zl00033z49gzgs3pxi' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0006c93x0dpsfmj7' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0005c93xec235sa3' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0003c93xn10b41wr' } } }
 			]
 		}
 	},
@@ -448,21 +448,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p10001drxza6r5efwd' } },
-		dressStyle: { connect: { id: 'cm4vpnff00004qo6tpxr9r643' } },
+		category: { connect: { id: 'cmbaxlga30007c975vij3yvo2' } },
+		dressStyle: { connect: { id: 'cmbaxlmyj0000c99vgq7ssuru' } },
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0005uiydbpxr01ik' } } },
-				{ color: { connect: { id: 'cm4vpmu1c0000uiydqbipzvzi' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000buiydrh173a9a' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000buiydrh173a9a' } } }
+				{ color: { connect: { id: 'cmbaxl03b0006c909rbn1vaq6' } } },
+				{ color: { connect: { id: 'cmbaxl03b0002c909ypzpaczy' } } },
+				{ color: { connect: { id: 'cmbaxl03b0003c9091qzoql3z' } } },
+				{ color: { connect: { id: 'cmbaxl03b0006c909rbn1vaq6' } } }
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00053z49eq82x818' } } },
-				{ size: { connect: { id: 'cm4vq56zl00023z49fr0w6hdo' } } },
-				{ size: { connect: { id: 'cm4vq56zl00063z49zkqul59x' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0006c93x0dpsfmj7' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0005c93xec235sa3' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0005c93xec235sa3' } } }
 			]
 		}
 	},
@@ -479,21 +479,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p10005drxzsar46qys' } },
-		dressStyle: { connect: { id: 'cm4vpnff00005qo6tuvko6q41' } },
+		category: { connect: { id: 'cmbaxlga30004c975pbp1rlnz' } },
+		dressStyle: { connect: { id: 'cmbaxlmyj0003c99vxi5gzt1e' } },
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0001uiydneanb22w' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0007uiyd9f9ti7ar' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0008uiydqvima3do' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000buiydrh173a9a' } } }
+				{ color: { connect: { id: 'cmbaxl03b0007c909ws2a7yi2' } } },
+				{ color: { connect: { id: 'cmbaxl03b0002c909ypzpaczy' } } },
+				{ color: { connect: { id: 'cmbaxl03b0007c909ws2a7yi2' } } },
+				{ color: { connect: { id: 'cmbaxl03b0001c909xonlylsn' } } }
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00023z49fr0w6hdo' } } },
-				{ size: { connect: { id: 'cm4vq56zl00073z49cxnip7le' } } },
-				{ size: { connect: { id: 'cm4vq56zl00083z49uprk2k19' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0001c93x1utnk869' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0008c93xd6f2en48' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0006c93x0dpsfmj7' } } }
 			]
 		}
 	},
@@ -510,21 +510,21 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
-		category: { connect: { id: 'cm4vpn4p10000drxz7iuahxu4' } },
-		dressStyle: { connect: { id: 'cm4vpnff00004qo6tpxr9r643' } },
+		category: { connect: { id: 'cmbaxlga30007c975vij3yvo2' } },
+		dressStyle: { connect: { id: 'cmbaxlmyj0002c99vkz3tzumf' } },
 		productColors: {
 			create: [
-				{ color: { connect: { id: 'cm4vpmu1d0008uiydqvima3do' } } },
-				{ color: { connect: { id: 'cm4vpmu1d0006uiydykta326u' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000auiydobchwscq' } } },
-				{ color: { connect: { id: 'cm4vpmu1d000buiydrh173a9a' } } }
+				{ color: { connect: { id: 'cmbaxl03b0002c909ypzpaczy' } } },
+				{ color: { connect: { id: 'cmbaxl03b0008c909vgc0kk90' } } },
+				{ color: { connect: { id: 'cmbaxl03b0009c90913roxw78' } } },
+				{ color: { connect: { id: 'cmbaxl03b0007c909ws2a7yi2' } } }
 			]
 		},
 		productSizes: {
 			create: [
-				{ size: { connect: { id: 'cm4vq56zl00013z49tbk0xbgy' } } },
-				{ size: { connect: { id: 'cm4vq56zl00033z49gzgs3pxi' } } },
-				{ size: { connect: { id: 'cm4vq56zl00063z49zkqul59x' } } }
+				{ size: { connect: { id: 'cmbaxl8bd0008c93xd6f2en48' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0000c93xzlnofjr6' } } },
+				{ size: { connect: { id: 'cmbaxl8bd0000c93xzlnofjr6' } } }
 			]
 		}
 	}
