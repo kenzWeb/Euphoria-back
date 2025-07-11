@@ -7,11 +7,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 25,
 		description:
 			'Premium athletic wear featuring breathable fabric and sleek black design. Perfect for high-intensity workouts or casual sport activities. Engineered for maximum comfort and mobility.',
-		images: [
-			'/uploads/products/Activewear.jpg',
-			'/uploads/products/Activewear.jpg',
-			'/uploads/products/Activewear.jpg'
-		],
+		images: ['/uploads/products/Activewear.jpg'],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga30002c9751jyqb7dp' } }, // Activewear
@@ -38,11 +34,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 50,
 		description:
 			'Luxurious gray sweatpants with a modern tapered fit. Features soft-touch fabric and adjustable waistband for all-day comfort. Ideal for both active lifestyles and relaxed weekends.',
-		images: [
-			'/uploads/products/Barboreal-Gray-Sweats.jpg',
-			'/uploads/products/Barboreal-Gray-Sweats.jpg',
-			'/uploads/products/Barboreal-Gray-Sweats.jpg'
-		],
+		images: ['/uploads/products/Barboreal-Gray-Sweats.jpg'],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga30006c9752v6vn5tw' } }, // Joggers
@@ -69,11 +61,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 45,
 		description:
 			'High-performance athletic shorts with moisture-wicking technology. Features a flattering cut and hidden pocket design. Perfect for running, gym workouts, or summer activities.',
-		images: [
-			'/uploads/products/Black-Shorts.jpg',
-			'/uploads/products/Black-Shorts.jpg',
-			'/uploads/products/Black-Shorts.jpg'
-		],
+		images: ['/uploads/products/Black-Shorts.jpg'],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga3000dc975as9g6buv' } }, // Tops
@@ -100,11 +88,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 15,
 		description:
 			'Stylish cropped top with an elegant floral pattern. Made with stretchy, breathable fabric for maximum comfort. Perfect for yoga sessions or casual summer outings.',
-		images: [
-			'/uploads/products/Blue-Flower-Print-Crop.jpg',
-			'/uploads/products/Blue-Flower-Print-Crop.jpg',
-			'/uploads/products/Blue-Flower-Print-Crop.jpg'
-		],
+		images: ['/uploads/products/Blue-Flower-Print-Crop.jpg'],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga30004c975pbp1rlnz' } }, // Tops
@@ -131,11 +115,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 55,
 		description:
 			'Premium cotton boxers with ergonomic design for maximum comfort. Features moisture-wicking technology and a secure waistband. Perfect blend of style and functionality.',
-		images: [
-			'/uploads/products/Boxers.jpg',
-			'/uploads/products/Boxers.jpg',
-			'/uploads/products/Boxers.jpg'
-		],
+		images: ['/uploads/products/Boxers.jpg'],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga30003c97512xh9vgy' } }, // Boxers
@@ -162,11 +142,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 65,
 		description:
 			'Classic checkered shirt with contemporary styling. Features high-quality cotton blend fabric and precise tailoring. Perfect for casual office wear or weekend outings.',
-		images: [
-			'/uploads/products/Checks-Shirt-with-white.jpg',
-			'/uploads/products/Checks-Shirt-with-white.jpg',
-			'/uploads/products/Checks-Shirt-with-white.jpg'
-		],
+		images: ['/uploads/products/Checks-Shirt-with-white.jpg'],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga3000ec975b8p5r7xc' } },
@@ -193,11 +169,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 49,
 		description:
 			'Elegant pink winter coat with modern silhouette. Features warm insulation and water-resistant exterior. Perfect for staying stylish during cold weather seasons.',
-		images: [
-			'/uploads/products/Coats-&-Parkas.jpg',
-			'/uploads/products/Coats-&-Parkas.jpg',
-			'/uploads/products/Coats-&-Parkas.jpg'
-		],
+		images: ['/uploads/products/Coats-&-Parkas.jpg'],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga30003c97512xh9vgy' } },
@@ -224,11 +196,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 53,
 		description:
 			'Sophisticated black dress with delicate flower patterns. Features flattering cut and premium fabric blend. Perfect for special occasions or elegant evening events.',
-		images: [
-			'/uploads/products/Blue-Flower-Print-Crop.jpg',
-			'/uploads/products/Blue-Flower-Print-Crop.jpg',
-			'/uploads/products/Blue-Flower-Print-Crop.jpg'
-		],
+		images: ['/uploads/products/Blue-Flower-Print-Crop.jpg'],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga30004c975pbp1rlnz' } },
@@ -255,11 +223,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 73,
 		description:
 			'Creative graphic tee featuring unique artistic design. Made with soft, durable cotton for lasting comfort. Perfect for expressing individual style in casual settings.',
-		images: [
-			'/uploads/products/Graphic-T-shirt.jpg',
-			'/uploads/products/Graphic-T-shirt.jpg',
-			'/uploads/products/Graphic-T-shirt.jpg'
-		],
+		images: ['/uploads/products/Graphic-T-shirt.jpg'],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga3000cc975ajgmalmr' } },
@@ -286,11 +250,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 60,
 		description:
 			'Cozy green hoodie with modern street-style design. Features warm fleece lining and convenient kangaroo pocket. Perfect for casual outings or relaxed weekends.',
-		images: [
-			'/uploads/products/Hoodies-&-Sweetshirt.jpg',
-			'/uploads/products/Hoodies-&-Sweetshirt2.jpg',
-			'/uploads/products/Hoodies-&-Sweetshirt.jpg'
-		],
+		images: ['/uploads/products/Hoodies-&-Sweetshirt.jpg'],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga20000c975140xqaab' } },
@@ -317,11 +277,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 50,
 		description:
 			'Nature-inspired dress with elegant leaf motifs. Features lightweight, flowing fabric and feminine silhouette. Perfect for spring and summer occasions.',
-		images: [
-			'/uploads/products/Leaves-Pattern.jpg',
-			'/uploads/products/Leaves-Pattern.jpg',
-			'/uploads/products/Leaves-Pattern.jpg'
-		],
+		images: ['/uploads/products/Leaves-Pattern.jpg'],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga30009c975ctgtjggd' } },
@@ -348,11 +304,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 70,
 		description:
 			'Fashion-forward hoodie with contemporary design elements. Features premium blend fabric and detailed finishing. Perfect for style-conscious casual wear.',
-		images: [
-			'/uploads/products/Levende-Hoodie.jpg',
-			'/uploads/products/Levende-Hoodie.jpg',
-			'/uploads/products/Levende-Hoodie.jpg'
-		],
+		images: ['/uploads/products/Levende-Hoodie.jpg'],
 		gender: EnumGender.FEMALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga3000ac975gkvex42g' } },
@@ -379,11 +331,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 30,
 		description:
 			'Classic brown polo with refined details. Features breathable pique cotton and perfect fit. Ideal for casual business settings or weekend gatherings.',
-		images: [
-			'/uploads/products/Polo-T-Shirt.jpg',
-			'/uploads/products/Polo-T-Shirt.jpg',
-			'/uploads/products/Polo-T-Shirt.jpg'
-		],
+		images: ['/uploads/products/Polo-T-Shirt.jpg'],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga30001c975gubnw81v' } },
@@ -410,11 +358,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 50,
 		description:
 			'Minimalist brown t-shirt with superior craftsmanship. Features premium cotton and perfect drape. Essential wardrobe staple for versatile styling.',
-		images: [
-			'/uploads/products/Plain-T-Shirt.jpg',
-			'/uploads/products/Plain-T-Shirt.jpg',
-			'/uploads/products/Plain-T-Shirt.jpg'
-		],
+		images: ['/uploads/products/Plain-T-Shirt.jpg'],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga30008c9750j44nab1' } },
@@ -441,11 +385,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 25,
 		description:
 			'Eye-catching printed tee with artistic design elements. Features soft, breathable fabric and modern fit. Perfect for making a bold fashion statement.',
-		images: [
-			'/uploads/products/Printed-T-Shirts.jpg',
-			'/uploads/products/Printed-T-Shirts.jpg',
-			'/uploads/products/Printed-T-Shirts.jpg'
-		],
+		images: ['/uploads/products/Printed-T-Shirts.jpg'],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga30007c975vij3yvo2' } },
@@ -472,11 +412,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		price: 45,
 		description:
 			'Contemporary sweatshirt with innovative design details. Features comfortable terry fabric and refined finishing. Perfect for urban lifestyle and casual occasions.',
-		images: [
-			'/uploads/products/Sweetshirtmange.jpg',
-			'/uploads/products/Sweetshirtmange.jpg',
-			'/uploads/products/Sweetshirtmange.jpg'
-		],
+		images: ['/uploads/products/Sweetshirtmange.jpg'],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga30004c975pbp1rlnz' } },
@@ -498,16 +434,12 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
 		}
 	},
 	{
-		name: 'Yellow Sweatshirt.jpg',
+		name: 'Yellow Sweatshirt',
 		brand: 'Woden',
 		price: 85,
 		description:
 			'Vibrant yellow sweatshirt with modern cut. Features premium cotton blend and detailed stitching. Perfect for adding a bright accent to casual outfits.',
-		images: [
-			'/uploads/products/Yellow-Sweatshirt.jpg',
-			'/uploads/products/Yellow-Sweatshirt.jpg',
-			'/uploads/products/Yellow-Sweatshirt.jpg'
-		],
+		images: ['/uploads/products/Yellow-Sweatshirt.jpg'],
 		gender: EnumGender.MALE,
 		type: EnumProductType.BASE,
 		category: { connect: { id: 'cmbaxlga30007c975vij3yvo2' } },
