@@ -24,7 +24,7 @@ export class DressStyleService {
 			}
 		})
 
-		if (!category) throw new NotFoundException('Cтиль не найден')
+		if (!category) throw new NotFoundException('Dress style not found')
 
 		return category
 	}
