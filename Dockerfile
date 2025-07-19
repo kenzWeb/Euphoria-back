@@ -4,10 +4,9 @@ WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
-COPY pnpm-lock.yaml ./
-
+COPY bun.lockb ./
 # Install pnpm
-RUN npm install -g pnpm
+RUN npm install -g bun
 
 # Install dependencies
 RUN pnpm install
