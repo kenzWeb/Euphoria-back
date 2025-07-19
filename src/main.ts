@@ -8,16 +8,19 @@ async function bootstrap() {
 
 	app.use(cookieParser())
 	app.enableCors({
-		origin: [
-			process.env.CLIENT_URL,
-			'https://euphoriak.vercel.app',
-			'http://localhost:3000',
-			'https://localhost:3000'
-		],
+		origin: [process.env.CLIENT_URL],
 		credentials: true,
-		exposedHeaders: 'set-cookie'
+		exposedHeaders: 'set-cookie',
+		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+		allowedHeaders: [
+			'Origin',
+			'X-Requested-With',
+			'Content-Type',
+			'Accept',
+			'Authorization'
+		]
 	})
 
-	await app.listen(process.env.PORT || 5001)
+	await app.listen(5001)
 }
 bootstrap()
