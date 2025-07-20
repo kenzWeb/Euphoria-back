@@ -1,18 +1,15 @@
 {
 	"version": 2,
-	"buildCommand": "npm run vercel-build",
-	"outputDirectory": "dist",
-	"installCommand": "npm install",
-	"framework": null,
-	"functions": {
-		"dist/main.js": {
-			"runtime": "nodejs18.x"
+	"builds": [
+		{
+			"src": "api/index.ts",
+			"use": "@vercel/node"
 		}
-	},
+	],
 	"routes": [
 		{
 			"src": "/(.*)",
-			"dest": "/dist/src/main.js"
+			"dest": "api/index.ts"
 		}
 	]
 }
