@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core'
-import * as cookieParser from 'cookie-parser'
 import { AppModule } from '../src/app.module'
+
+const cookieParser = require('cookie-parser')
 
 let app: any
 
@@ -26,6 +27,18 @@ async function bootstrap() {
 }
 
 export default async (req: any, res: any) => {
-	const server = await bootstrap()
-	return server.getHttpAdapter().getInstance()(req, res)
+	try {
+		const nestApp = await bootstrap()
+		const httpAdapter = nestApp.getHttpAdapter()
+		const instance = httpAdapter.getInstance()
+
+		return instance(req, res)
+	} catch (error) {
+		console.error('Error in serverless function:', error)
+		if (!res.headersSent) {
+			res
+				.status(500)
+				.json({ error: 'Internal Server Error', details: error.message })
+		}
+	}
 }
