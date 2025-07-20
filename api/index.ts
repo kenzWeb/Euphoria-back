@@ -1,44 +1,52 @@
 import { NestFactory } from '@nestjs/core'
+import { ExpressAdapter } from '@nestjs/platform-express'
+import * as express from 'express'
 import { AppModule } from '../src/app.module'
 
 const cookieParser = require('cookie-parser')
 
-let app: any
+let cachedApp: any = null
 
-async function bootstrap() {
-	if (!app) {
-		app = await NestFactory.create(AppModule)
-
-		app.use(cookieParser())
-		app.enableCors({
-			origin: [
-				process.env.CLIENT_URL,
-				'https://euphoriak.vercel.app',
-				'http://localhost:3000',
-				'https://localhost:3000'
-			],
-			credentials: true,
-			exposedHeaders: 'set-cookie'
-		})
-
-		await app.init()
+async function createApp() {
+	if (cachedApp) {
+		return cachedApp
 	}
-	return app
+
+	const expressApp = express()
+	const adapter = new ExpressAdapter(expressApp)
+
+	const app = await NestFactory.create(AppModule, adapter)
+
+	app.use(cookieParser())
+	app.enableCors({
+		origin: [
+			process.env.CLIENT_URL,
+			'https://euphoriak.vercel.app',
+			'http://localhost:3000',
+			'https://localhost:3000'
+		],
+		credentials: true,
+		exposedHeaders: 'set-cookie',
+		methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+		allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
+	})
+
+	await app.init()
+	cachedApp = expressApp
+	return expressApp
 }
 
 export default async (req: any, res: any) => {
 	try {
-		const nestApp = await bootstrap()
-		const httpAdapter = nestApp.getHttpAdapter()
-		const instance = httpAdapter.getInstance()
-
-		return instance(req, res)
+		const app = await createApp()
+		return app(req, res)
 	} catch (error) {
-		console.error('Error in serverless function:', error)
+		console.error('Serverless function error:', error)
 		if (!res.headersSent) {
-			res
-				.status(500)
-				.json({ error: 'Internal Server Error', details: error.message })
+			res.status(500).json({
+				error: 'Internal Server Error',
+				message: error.message
+			})
 		}
 	}
 }
