@@ -5,23 +5,24 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 COPY bun.lockb ./
-# Install pnpm
+
+# Install bun
 RUN npm install -g bun
 
 # Install dependencies
-RUN pnpm install
+RUN bun install
 
 # Copy source code
 COPY . .
 
 # Generate Prisma client
-RUN pnpm exec prisma generate
+RUN bun exec prisma generate
 
 # Build application
-RUN pnpm run build
+RUN bun run build
 
 # Expose port
 EXPOSE 5001
 
 # Start application
-CMD ["pnpm", "run", "start:prod"]
+CMD ["bun", "run", "start:prod"]

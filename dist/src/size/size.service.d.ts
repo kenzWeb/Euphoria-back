@@ -1,0 +1,36 @@
+import { PrismaService } from 'src/prisma.service';
+import { SizeDto } from './dto/size.dto';
+export declare class SizeService {
+    private prisma;
+    constructor(prisma: PrismaService);
+    getAll(): Promise<{
+        id: string;
+        name: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }[]>;
+    getById(id: string): Promise<{
+        id: string;
+        name: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
+    create(dto: SizeDto): Promise<{
+        id: string;
+        name: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
+    update(id: string, dto: SizeDto): Promise<{
+        id: string;
+        name: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
+    delete(id: string): Promise<{
+        id: string;
+        name: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
+}
