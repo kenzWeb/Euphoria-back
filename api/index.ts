@@ -1,7 +1,7 @@
-import express from 'express'
 import { NestFactory } from '@nestjs/core'
-import { AppModule } from '../src/app.module'
 import { ExpressAdapter } from '@nestjs/platform-express'
+import express from 'express'
+import { AppModule } from '../src/app.module'
 
 const cookieParser = require('cookie-parser')
 
@@ -9,7 +9,7 @@ const server = express()
 
 async function createNestApp() {
 	const app = await NestFactory.create(AppModule, new ExpressAdapter(server))
-	
+
 	app.use(cookieParser())
 	app.enableCors({
 		origin: [
