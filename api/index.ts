@@ -1,6 +1,4 @@
 import { NestFactory } from '@nestjs/core'
-import { ExpressAdapter } from '@nestjs/platform-express'
-import * as express from 'express'
 import { AppModule } from '../src/app.module'
 
 const cookieParser = require('cookie-parser')
@@ -12,10 +10,7 @@ async function createApp() {
 		return cachedApp
 	}
 
-	const expressApp = express()
-	const adapter = new ExpressAdapter(expressApp)
-
-	const app = await NestFactory.create(AppModule, adapter)
+	const app = await NestFactory.create(AppModule)
 
 	app.use(cookieParser())
 	app.enableCors({
@@ -32,8 +27,10 @@ async function createApp() {
 	})
 
 	await app.init()
-	cachedApp = expressApp
-	return expressApp
+	
+	const expressInstance = app.getHttpAdapter().getInstance()
+	cachedApp = expressInstance
+	return expressInstance
 }
 
 export default async (req: any, res: any) => {
@@ -43,9 +40,9 @@ export default async (req: any, res: any) => {
 	} catch (error) {
 		console.error('Serverless function error:', error)
 		if (!res.headersSent) {
-			res.status(500).json({
-				error: 'Internal Server Error',
-				message: error.message
+			res.status(500).json({ 
+				error: 'Internal Server Error', 
+				message: error.message 
 			})
 		}
 	}
